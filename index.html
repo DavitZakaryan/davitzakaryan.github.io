@@ -151,6 +151,55 @@ section{padding:84px 0;border-bottom:1px solid var(--line)}
 .why-item p{color:var(--muted);font-size:.94rem}
 @media(max-width:700px){.why-list{grid-template-columns:1fr}}
 
+/* ===== CALCULATOR ===== */
+.calc-wrap{max-width:720px;margin:0 auto}
+.calc-progress{display:flex;gap:6px;margin-bottom:40px}
+.calc-progress-step{flex:1;height:3px;background:var(--line);transition:background .3s}
+.calc-progress-step.done{background:var(--gold)}
+.calc-progress-step.active{background:rgba(201,162,39,.5)}
+.calc-step{display:none}
+.calc-step.active{display:block}
+.calc-q{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.5rem,3.5vw,2rem);margin-bottom:8px;line-height:1.1}
+.calc-hint{color:var(--muted);font-size:.88rem;margin-bottom:26px}
+.calc-options{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:28px}
+.calc-options.single-col{grid-template-columns:1fr}
+@media(max-width:560px){.calc-options{grid-template-columns:1fr}}
+.calc-opt{
+  border:1px solid var(--line);background:var(--panel);padding:18px 20px;
+  cursor:pointer;transition:border-color .15s,background .15s;user-select:none;
+  display:flex;align-items:flex-start;gap:14px;
+}
+.calc-opt:hover{border-color:rgba(201,162,39,.5);background:rgba(201,162,39,.04)}
+.calc-opt.selected{border-color:var(--gold);background:rgba(201,162,39,.1)}
+.calc-opt input{display:none}
+.calc-opt-icon{font-size:1.4rem;line-height:1;flex-shrink:0;margin-top:2px}
+.calc-opt-body strong{display:block;font-size:.95rem;font-weight:600;margin-bottom:3px}
+.calc-opt-body span{font-size:.8rem;color:var(--muted)}
+.calc-opt-price{margin-left:auto;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--gold);white-space:nowrap;flex-shrink:0}
+.calc-nav{display:flex;gap:12px;margin-top:4px}
+.calc-back{background:transparent;border:1px solid var(--line);color:var(--muted);padding:12px 22px;cursor:pointer;font-size:.82rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;transition:border-color .15s}
+.calc-back:hover{border-color:var(--gold);color:var(--text)}
+.calc-next{background:var(--gold);border:none;color:#111;padding:12px 28px;cursor:pointer;font-size:.82rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:opacity .15s}
+.calc-next:hover{opacity:.85}
+.calc-next:disabled{opacity:.35;cursor:not-allowed}
+.calc-step-label{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+
+/* Result */
+.calc-result{display:none}
+.calc-result.active{display:block}
+.calc-result-table{width:100%;border-collapse:collapse;margin:28px 0}
+.calc-result-table td{padding:13px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:.9rem;vertical-align:top}
+.calc-result-table td:last-child{text-align:right;font-family:'Bebas Neue',sans-serif;font-size:1.15rem;color:var(--gold);padding-left:16px;white-space:nowrap}
+.calc-result-table .total-row td{border-top:1px solid var(--gold);border-bottom:0;padding-top:18px;font-weight:700;font-size:1rem}
+.calc-result-table .total-row td:last-child{font-size:1.6rem}
+.calc-result-note{font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--muted);line-height:1.7;margin-top:20px}
+.calc-result-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+.calc-restart{background:transparent;border:1px solid var(--line);color:var(--muted);padding:12px 22px;cursor:pointer;font-size:.82rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.calc-restart:hover{border-color:var(--gold);color:var(--text)}
+.calc-savings{border:1px solid var(--gold);background:rgba(201,162,39,.06);padding:16px 20px;margin:20px 0;display:none}
+.calc-savings p{font-size:.9rem;color:var(--text)}
+.calc-savings strong{color:var(--gold)}
+
 /* ===== CONTACT ===== */
 .contact{text-align:center;border-bottom:0}
 .contact h2{font-size:clamp(2.4rem,5vw,3.6rem);margin:14px 0 18px}
@@ -177,6 +226,7 @@ a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
       <li><a href="#services">Services</a></li>
       <li><a href="#work">Work</a></li>
       <li><a href="#prices">Prices</a></li>
+      <li><a href="#calculator">Calculator</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <a class="btn" href="https://wa.me/16269494060" target="_blank" rel="noopener">WhatsApp</a>
@@ -302,6 +352,208 @@ a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
   </div>
 </section>
 
+<!-- CALCULATOR -->
+<section id="calculator">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="mono">Price Calculator</p>
+      <h2>Get your exact quote in 60 seconds.</h2>
+    </div>
+    <div class="calc-wrap">
+
+      <!-- Progress bar -->
+      <div class="calc-progress" id="calcProgress"></div>
+
+      <!-- Step 1: Project type -->
+      <div class="calc-step active" data-step="1">
+        <p class="calc-step-label">Step 1 of 6 — Project Type</p>
+        <p class="calc-q">What do you need?</p>
+        <p class="calc-hint">Choose the option that best describes your project.</p>
+        <div class="calc-options single-col">
+          <label class="calc-opt" data-value="landing" data-price="750" data-label="Landing Page (1 page)">
+            <input type="radio" name="type">
+            <span class="calc-opt-icon">📄</span>
+            <span class="calc-opt-body"><strong>Landing Page</strong><span>One page — your business, services, contact. Most popular.</span></span>
+            <span class="calc-opt-price">$750</span>
+          </label>
+          <label class="calc-opt" data-value="website" data-price="1500" data-label="Business Website (3–5 pages)">
+            <input type="radio" name="type">
+            <span class="calc-opt-icon">🌐</span>
+            <span class="calc-opt-body"><strong>Business Website</strong><span>3–5 pages: Home, Services, About, Gallery, Contact.</span></span>
+            <span class="calc-opt-price">$1,500</span>
+          </label>
+          <label class="calc-opt" data-value="redesign" data-price="600" data-label="Website Redesign">
+            <input type="radio" name="type">
+            <span class="calc-opt-icon">🔄</span>
+            <span class="calc-opt-body"><strong>Website Redesign</strong><span>You already have a site — refresh the look, fix mobile & speed.</span></span>
+            <span class="calc-opt-price">from $600</span>
+          </label>
+          <label class="calc-opt" data-value="webapp" data-price="750" data-label="Landing Page + Web App">
+            <input type="radio" name="type">
+            <span class="calc-opt-icon">⚙️</span>
+            <span class="calc-opt-body"><strong>Landing + Interactive Feature</strong><span>Calculator, booking system, or payment integration.</span></span>
+            <span class="calc-opt-price">$750+</span>
+          </label>
+        </div>
+        <div class="calc-nav">
+          <button class="calc-next" onclick="calcNext()" disabled>Next →</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Pages / complexity -->
+      <div class="calc-step" data-step="2">
+        <p class="calc-step-label">Step 2 of 6 — Details</p>
+        <p class="calc-q" id="step2Q">Extra pages or features?</p>
+        <p class="calc-hint" id="step2Hint">Select all that apply.</p>
+        <div class="calc-options" id="step2Options"></div>
+        <div class="calc-nav">
+          <button class="calc-back" onclick="calcBack()">← Back</button>
+          <button class="calc-next" onclick="calcNext()">Next →</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Languages -->
+      <div class="calc-step" data-step="3">
+        <p class="calc-step-label">Step 3 of 6 — Languages</p>
+        <p class="calc-q">How many languages?</p>
+        <p class="calc-hint">Multilingual sites require additional layout and content work.</p>
+        <div class="calc-options single-col">
+          <label class="calc-opt" data-value="en" data-multiplier="0" data-label="English only">
+            <input type="radio" name="lang">
+            <span class="calc-opt-icon">🇺🇸</span>
+            <span class="calc-opt-body"><strong>English only</strong><span>Standard.</span></span>
+            <span class="calc-opt-price">included</span>
+          </label>
+          <label class="calc-opt" data-value="en_ru" data-multiplier="30" data-label="English + Russian or Armenian (+30%)">
+            <input type="radio" name="lang">
+            <span class="calc-opt-icon">🇺🇸🇷🇺</span>
+            <span class="calc-opt-body"><strong>English + Russian or Armenian</strong><span>Two-language version of the site.</span></span>
+            <span class="calc-opt-price">+30%</span>
+          </label>
+          <label class="calc-opt" data-value="en_ru_hy" data-multiplier="40" data-label="English + Russian + Armenian (+40%)">
+            <input type="radio" name="lang">
+            <span class="calc-opt-icon">🇺🇸🇷🇺🇦🇲</span>
+            <span class="calc-opt-body"><strong>English + Russian + Armenian</strong><span>Full trilingual site — reaches the entire LA community.</span></span>
+            <span class="calc-opt-price">+40%</span>
+          </label>
+        </div>
+        <div class="calc-nav">
+          <button class="calc-back" onclick="calcBack()">← Back</button>
+          <button class="calc-next" onclick="calcNext()" disabled>Next →</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Google / SEO -->
+      <div class="calc-step" data-step="4">
+        <p class="calc-step-label">Step 4 of 6 — Google & SEO</p>
+        <p class="calc-q">Do you need help getting found on Google?</p>
+        <p class="calc-hint">Select everything you need. You can skip this step if you already have it covered.</p>
+        <div class="calc-options single-col" id="step4Options">
+          <label class="calc-opt" data-value="gbp" data-price="250" data-label="Google Business Profile Setup">
+            <input type="checkbox" name="seo">
+            <span class="calc-opt-icon">📍</span>
+            <span class="calc-opt-body"><strong>Google Business Profile Setup</strong><span>Show up on Google Maps. The #1 source of local calls.</span></span>
+            <span class="calc-opt-price">$250</span>
+          </label>
+          <label class="calc-opt" data-value="localseo" data-price="350" data-label="Local SEO Package">
+            <input type="checkbox" name="seo">
+            <span class="calc-opt-icon">🔍</span>
+            <span class="calc-opt-body"><strong>Local SEO Package</strong><span>Yelp, Apple Maps, Bing + on-site optimization.</span></span>
+            <span class="calc-opt-price">$350</span>
+          </label>
+          <label class="calc-opt" data-value="audit" data-price="200" data-label="SEO Audit">
+            <input type="checkbox" name="seo">
+            <span class="calc-opt-icon">📊</span>
+            <span class="calc-opt-body"><strong>SEO Audit</strong><span>Full report: what's broken, what to fix, in plain language.</span></span>
+            <span class="calc-opt-price">$200</span>
+          </label>
+          <label class="calc-opt" data-value="none_seo" data-label="No SEO services for now">
+            <input type="checkbox" name="seo">
+            <span class="calc-opt-icon">⏭️</span>
+            <span class="calc-opt-body"><strong>Skip for now</strong><span>Just the website is fine.</span></span>
+            <span class="calc-opt-price">—</span>
+          </label>
+        </div>
+        <div class="calc-nav">
+          <button class="calc-back" onclick="calcBack()">← Back</button>
+          <button class="calc-next" onclick="calcNext()">Next →</button>
+        </div>
+      </div>
+
+      <!-- Step 5: Monthly support -->
+      <div class="calc-step" data-step="5">
+        <p class="calc-step-label">Step 5 of 6 — Monthly Support</p>
+        <p class="calc-q">Do you need ongoing support?</p>
+        <p class="calc-hint">After launch, I can keep your site running and growing.</p>
+        <div class="calc-options single-col">
+          <label class="calc-opt" data-value="none_support" data-price="0" data-label="No monthly support">
+            <input type="radio" name="support">
+            <span class="calc-opt-icon">🚀</span>
+            <span class="calc-opt-body"><strong>No support needed</strong><span>I'll manage it myself after launch.</span></span>
+            <span class="calc-opt-price">—</span>
+          </label>
+          <label class="calc-opt" data-value="basic" data-price="50" data-label="Basic Care — $50/mo">
+            <input type="radio" name="support">
+            <span class="calc-opt-icon">🛡️</span>
+            <span class="calc-opt-body"><strong>Basic Care</strong><span>Hosting, backups, small edits (up to 1 hr/month).</span></span>
+            <span class="calc-opt-price">$50/mo</span>
+          </label>
+          <label class="calc-opt" data-value="growth" data-price="100" data-label="Growth Plan — $100/mo">
+            <input type="radio" name="support">
+            <span class="calc-opt-icon">📈</span>
+            <span class="calc-opt-body"><strong>Growth Plan</strong><span>Basic Care + Google posts, review responses, monthly report.</span></span>
+            <span class="calc-opt-price">$100/mo</span>
+          </label>
+        </div>
+        <div class="calc-nav">
+          <button class="calc-back" onclick="calcBack()">← Back</button>
+          <button class="calc-next" onclick="calcNext()" disabled>Next →</button>
+        </div>
+      </div>
+
+      <!-- Step 6: Timeline -->
+      <div class="calc-step" data-step="6">
+        <p class="calc-step-label">Step 6 of 6 — Timeline</p>
+        <p class="calc-q">How fast do you need it?</p>
+        <p class="calc-hint">Rush jobs require rearranging the schedule — there's a fee for that.</p>
+        <div class="calc-options single-col">
+          <label class="calc-opt" data-value="normal" data-rush="0" data-label="Standard — 5 to 7 days">
+            <input type="radio" name="timeline">
+            <span class="calc-opt-icon">📅</span>
+            <span class="calc-opt-body"><strong>Standard — 5–7 business days</strong><span>Quality work, proper process, 2 rounds of revisions.</span></span>
+            <span class="calc-opt-price">included</span>
+          </label>
+          <label class="calc-opt" data-value="rush" data-rush="25" data-label="Rush — 3 days (+25%)">
+            <input type="radio" name="timeline">
+            <span class="calc-opt-icon">⚡</span>
+            <span class="calc-opt-body"><strong>Rush — ready in 3 days</strong><span>Priority queue, faster turnaround.</span></span>
+            <span class="calc-opt-price">+25%</span>
+          </label>
+        </div>
+        <div class="calc-nav">
+          <button class="calc-back" onclick="calcBack()">← Back</button>
+          <button class="calc-next" onclick="calcShowResult()" disabled>See My Price →</button>
+        </div>
+      </div>
+
+      <!-- Result -->
+      <div class="calc-result" id="calcResult">
+        <p class="calc-step-label">Your Custom Quote</p>
+        <p class="calc-q">Here's your price breakdown.</p>
+        <div class="calc-savings" id="calcSavings"></div>
+        <table class="calc-result-table" id="calcTable"></table>
+        <p class="calc-result-note" id="calcNote"></p>
+        <div class="calc-result-cta">
+          <a class="btn" id="calcWhatsapp" href="#" target="_blank" rel="noopener">Send via WhatsApp</a>
+          <a class="btn btn-ghost" href="tel:+16269494060">Call (626) 949-4060</a>
+          <button class="calc-restart" onclick="calcRestart()">Start Over</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- WHY -->
 <section id="why">
   <div class="wrap">
@@ -351,5 +603,291 @@ a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
   </div>
 </footer>
 
+<script>
+const TOTAL_STEPS = 6;
+let currentStep = 1;
+const answers = {};
+
+// Build progress bar
+(function(){
+  const bar = document.getElementById('calcProgress');
+  for(let i=1;i<=TOTAL_STEPS;i++){
+    const d = document.createElement('div');
+    d.className='calc-progress-step'+(i===1?' active':'');
+    d.id='prog'+i;
+    bar.appendChild(d);
+  }
+})();
+
+// Populate step 2 based on type selection
+function buildStep2(){
+  const type = answers.type?.value;
+  const q = document.getElementById('step2Q');
+  const hint = document.getElementById('step2Hint');
+  const opts = document.getElementById('step2Options');
+  opts.innerHTML='';
+
+  if(type==='website'){
+    q.textContent='How many pages?';
+    hint.textContent='Standard plan includes 3 pages. Each extra page adds to the price.';
+    opts.className='calc-options single-col';
+    [
+      {v:'p3',price:0,label:'3 pages',desc:'Home · Services · Contact'},
+      {v:'p4',price:150,label:'4 pages',desc:'+ one extra page (e.g. About or Gallery)'},
+      {v:'p5',price:300,label:'5 pages',desc:'+ two extra pages'},
+      {v:'p6',price:500,label:'6+ pages',desc:'Each page above 5 adds $150–200'},
+    ].forEach(o=>{
+      opts.innerHTML+=`<label class="calc-opt" data-value="${o.v}" data-price="${o.price}" data-label="${o.label}">
+        <input type="radio" name="pages">
+        <span class="calc-opt-body"><strong>${o.label}</strong><span>${o.desc}</span></span>
+        <span class="calc-opt-price">${o.price?'+$'+o.price:'included'}</span>
+      </label>`;
+    });
+    setupRadios(opts);
+  } else if(type==='webapp'){
+    q.textContent='What kind of interactive feature?';
+    hint.textContent='This is added on top of the landing page price ($750 base).';
+    opts.className='calc-options single-col';
+    [
+      {v:'calc_feat',price:400,label:'Calculator or configurator',desc:'Price estimator, quiz, product configurator'},
+      {v:'booking',price:600,label:'Booking / scheduling system',desc:'Appointment booking with calendar integration'},
+      {v:'payment',price:800,label:'Payment integration',desc:'Stripe, Square, or similar online payments'},
+    ].forEach(o=>{
+      opts.innerHTML+=`<label class="calc-opt" data-value="${o.v}" data-price="${o.price}" data-label="${o.label}">
+        <input type="checkbox" name="features">
+        <span class="calc-opt-body"><strong>${o.label}</strong><span>${o.desc}</span></span>
+        <span class="calc-opt-price">+$${o.price}</span>
+      </label>`;
+    });
+    setupCheckboxes(opts);
+  } else {
+    // landing or redesign — no sub-options needed, skip step automatically
+    answers.step2 = [];
+    return false; // skip
+  }
+  return true;
+}
+
+function setupRadios(container){
+  container.querySelectorAll('.calc-opt').forEach(opt=>{
+    opt.addEventListener('click',()=>{
+      container.querySelectorAll('.calc-opt').forEach(o=>o.classList.remove('selected'));
+      opt.classList.add('selected');
+      opt.querySelector('input').checked=true;
+      // enable Next in current step
+      const step = document.querySelector('.calc-step.active');
+      const btn = step.querySelector('.calc-next');
+      if(btn) btn.disabled=false;
+    });
+  });
+}
+
+function setupCheckboxes(container){
+  container.querySelectorAll('.calc-opt').forEach(opt=>{
+    opt.addEventListener('click',()=>{
+      const cb = opt.querySelector('input[type=checkbox]');
+      cb.checked = !cb.checked;
+      opt.classList.toggle('selected', cb.checked);
+    });
+  });
+}
+
+// Init radio/checkbox listeners for static steps
+document.querySelectorAll('.calc-step').forEach(step=>{
+  step.querySelectorAll('.calc-opt').forEach(opt=>{
+    opt.addEventListener('click',()=>{
+      const inp = opt.querySelector('input');
+      if(inp.type==='radio'){
+        step.querySelectorAll('.calc-opt').forEach(o=>o.classList.remove('selected'));
+        opt.classList.add('selected');
+        inp.checked=true;
+        const btn = step.querySelector('.calc-next');
+        if(btn) btn.disabled=false;
+      } else {
+        inp.checked=!inp.checked;
+        opt.classList.toggle('selected',inp.checked);
+        // handle "none" exclusivity in step 4
+        if(opt.dataset.value==='none_seo' && inp.checked){
+          step.querySelectorAll('.calc-opt').forEach(o=>{
+            if(o!==opt){o.classList.remove('selected');o.querySelector('input').checked=false;}
+          });
+        } else if(opt.dataset.value!=='none_seo'){
+          const noneOpt=step.querySelector('[data-value="none_seo"]');
+          if(noneOpt){noneOpt.classList.remove('selected');noneOpt.querySelector('input').checked=false;}
+        }
+      }
+    });
+  });
+});
+
+function updateProgress(step){
+  for(let i=1;i<=TOTAL_STEPS;i++){
+    const el=document.getElementById('prog'+i);
+    el.className='calc-progress-step'+(i<step?' done':i===step?' active':'');
+  }
+}
+
+function getSelected(step){
+  const opts=step.querySelectorAll('.calc-opt.selected');
+  return [...opts].map(o=>({value:o.dataset.value,price:parseInt(o.dataset.price)||0,multiplier:parseInt(o.dataset.multiplier)||0,rush:parseInt(o.dataset.rush)||0,label:o.dataset.label}));
+}
+
+function showStep(n){
+  document.querySelectorAll('.calc-step').forEach(s=>s.classList.remove('active'));
+  const s=document.querySelector(`.calc-step[data-step="${n}"]`);
+  if(s) s.classList.add('active');
+  updateProgress(n);
+  document.getElementById('calculator').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function calcNext(){
+  const step=document.querySelector('.calc-step.active');
+  const stepNum=parseInt(step.dataset.step);
+  const sel=getSelected(step);
+  answers['step'+stepNum]=sel;
+  if(stepNum===1){
+    answers.type=sel[0];
+    const show=buildStep2();
+    if(!show){
+      answers.step2=[];
+      currentStep=3;
+      showStep(3);
+      return;
+    }
+  }
+  if(stepNum===2) answers.extras=sel;
+  if(stepNum===3) answers.lang=sel[0]||{multiplier:0,label:'English only'};
+  if(stepNum===4) answers.seo=sel.filter(s=>s.value!=='none_seo');
+  if(stepNum===5) answers.support=sel[0]||{price:0,label:'No support'};
+  currentStep=stepNum+1;
+  showStep(currentStep);
+}
+
+function calcBack(){
+  if(currentStep===3 && (answers.type?.value==='landing'||answers.type?.value==='redesign')){
+    currentStep=1; showStep(1); return;
+  }
+  currentStep--;
+  showStep(currentStep);
+}
+
+function calcShowResult(){
+  const step=document.querySelector('.calc-step.active');
+  answers['step'+step.dataset.step]=getSelected(step);
+
+  // Save last step
+  const lastStep=document.querySelector('.calc-step.active');
+  const lastSel=getSelected(lastStep);
+  answers.timeline=lastSel[0]||{rush:0,label:'Standard'};
+
+  const a={
+    type:   answers.type||{value:'landing',price:750,label:'Landing Page'},
+    extras: answers.extras||[],
+    lang:   answers.lang||{multiplier:0,label:'English only'},
+    seo:    answers.seo||[],
+    support:answers.support||{price:0,label:'No support'},
+    timeline:answers.timeline
+  };
+
+  // Calculate
+  let base=a.type.price||0;
+  let rows=[];
+  rows.push({label:a.type.label||'Website',price:base});
+
+  // extras
+  let extrasTotal=0;
+  (a.extras||[]).forEach(e=>{
+    if(e.price>0){extrasTotal+=e.price;rows.push({label:e.label,price:e.price});}
+  });
+
+  let siteSubtotal=base+extrasTotal;
+
+  // language multiplier
+  const langMult=a.lang.multiplier||0;
+  if(langMult>0){
+    const langAdd=Math.round(siteSubtotal*langMult/100);
+    rows.push({label:a.lang.label,price:langAdd});
+    siteSubtotal+=langAdd;
+  }
+
+  // check Launch Package bundle
+  const hasGBP=a.seo.some(s=>s.value==='gbp');
+  const hasLocalSEO=a.seo.some(s=>s.value==='localseo');
+  const isLanding=(a.type.value==='landing');
+  let bundleApplied=false;
+  let bundleSavings=0;
+
+  if(isLanding&&hasGBP&&hasLocalSEO&&langMult===0&&(a.extras||[]).length===0){
+    bundleApplied=true;
+    const normalSEO=250+350;
+    const bundlePrice=1200-750;
+    bundleSavings=normalSEO-bundlePrice;
+    rows.push({label:'Google Business Profile + Local SEO (Launch Bundle)',price:bundlePrice,note:'Bundle pricing applied'});
+  } else {
+    a.seo.forEach(s=>{rows.push({label:s.label,price:s.price});});
+  }
+
+  let total=rows.reduce((s,r)=>s+r.price,0);
+
+  // rush
+  const rushPct=a.timeline.rush||0;
+  if(rushPct>0){
+    const rushAdd=Math.round(total*rushPct/100);
+    rows.push({label:'Rush delivery (3 days) +25%',price:rushAdd});
+    total+=rushAdd;
+  }
+
+  // Minimum $500
+  total=Math.max(total,500);
+
+  // Build table
+  const tbody=document.getElementById('calcTable');
+  tbody.innerHTML='';
+  rows.forEach(r=>{
+    tbody.innerHTML+=`<tr><td>${r.label}${r.note?`<br><small style="color:var(--gold);font-size:.72rem">${r.note}</small>`:''}</td><td>$${r.price.toLocaleString()}</td></tr>`;
+  });
+  tbody.innerHTML+=`<tr class="total-row"><td><strong>Total (one-time)</strong></td><td>$${total.toLocaleString()}</td></tr>`;
+
+  // Savings notice
+  const savingsEl=document.getElementById('calcSavings');
+  if(bundleApplied&&bundleSavings>0){
+    savingsEl.style.display='block';
+    savingsEl.innerHTML=`<p>You qualify for the <strong>Launch Package bundle</strong> — you save <strong>$${bundleSavings}</strong> vs. buying separately.</p>`;
+  } else {
+    savingsEl.style.display='none';
+  }
+
+  // Note
+  const deposit=Math.round(total*0.5);
+  let note=`50% deposit to start ($${deposit.toLocaleString()}) · Balance on delivery · 2 rounds of revisions included`;
+  if(isLanding||a.type.value==='landing') note+=` · Landing delivered in 5–7 business days`;
+  if(a.support.price>0) note+=`\n+$${a.support.price}/mo for ${a.support.label} after launch`;
+  document.getElementById('calcNote').textContent=note;
+
+  // WhatsApp link
+  let msg=`Hi Davit! I used the calculator on your site.\n\nProject: ${a.type.label||''}\n`;
+  if(a.extras?.length) msg+=a.extras.map(e=>e.label).join(', ')+'\n';
+  if(langMult>0) msg+=`Languages: ${a.lang.label}\n`;
+  if(a.seo?.length) msg+=`SEO: ${a.seo.map(s=>s.label).join(', ')}\n`;
+  if(a.support.price>0) msg+=`Support: ${a.support.label}\n`;
+  msg+=`Timeline: ${a.timeline.label}\n\nEstimated total: $${total.toLocaleString()}\n\nCan we talk?`;
+  document.getElementById('calcWhatsapp').href=`https://wa.me/16269494060?text=${encodeURIComponent(msg)}`;
+
+  // Show result
+  document.querySelectorAll('.calc-step').forEach(s=>s.classList.remove('active'));
+  updateProgress(TOTAL_STEPS+1);
+  document.getElementById('calcResult').classList.add('active');
+  document.getElementById('calculator').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function calcRestart(){
+  Object.keys(answers).forEach(k=>delete answers[k]);
+  currentStep=1;
+  document.querySelectorAll('.calc-opt').forEach(o=>{o.classList.remove('selected');o.querySelector('input').checked=false;});
+  document.querySelectorAll('.calc-next').forEach(b=>{if(b.textContent.includes('→')&&!b.textContent.includes('See'))b.disabled=true;});
+  document.getElementById('calcResult').classList.remove('active');
+  showStep(1);
+}
+</script>
 </body>
 </html>
