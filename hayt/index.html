@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Պատվիրեք ծառայություն — LA Armenian News · Sitvio</title>
+<meta name="description" content="Թողեք հեռախոսահամարը՝ մասնագետը կզանգի ձեզ։ Ձեզ համար՝ անվճար։ Оставьте номер телефона — специалист перезвонит вам. Бесплатно для вас.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Armenian:wght@400;600;700;800&family=Noto+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FBF6EA; --card:#FFFFFF; --ink:#1C1917; --muted:#57534E;
+    --hl:#FFD23F; --line:#E7DFC9; --field:#FFFDF6;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Noto Sans Armenian","Noto Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+    line-height:1.5;
+  }
+  .wrap{max-width:560px; margin:0 auto; padding:20px 16px 48px}
+  .langbar{display:flex; gap:8px; justify-content:center; margin:4px 0 14px}
+  .langbar button{
+    font:inherit; font-weight:700; font-size:14px; cursor:pointer;
+    padding:8px 16px; border-radius:999px; border:2px solid var(--ink);
+    background:#fff; color:var(--ink); min-height:44px;
+  }
+  .langbar button.active{background:var(--ink); color:#fff}
+  .brand{
+    text-align:center; font-family:"Noto Sans",sans-serif; font-weight:700;
+    letter-spacing:.22em; font-size:12px; color:var(--muted); margin:0 0 14px;
+  }
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:20px;
+    padding:28px 22px 26px; box-shadow:0 6px 24px rgba(28,25,23,.06);
+  }
+  h1{font-size:32px; line-height:1.2; font-weight:800; margin:0 0 10px; text-align:center}
+  h1 mark{background:var(--hl); color:inherit; padding:0 6px; border-radius:6px; box-decoration-break:clone; -webkit-box-decoration-break:clone}
+  .sub{text-align:center; color:var(--muted); font-size:17px; margin:0 0 24px}
+  .how{border-top:2px dashed var(--line); padding-top:18px; margin-bottom:8px}
+  .how h2{font-size:19px; margin:0 0 12px}
+  .how ol{list-style:none; margin:0; padding:0; display:grid; gap:10px}
+  .how li{display:flex; gap:12px; align-items:flex-start; font-size:16px}
+  .num{
+    flex:0 0 auto; width:28px; height:28px; border-radius:50%;
+    background:var(--hl); color:var(--ink); font-weight:800;
+    display:flex; align-items:center; justify-content:center; font-size:15px; margin-top:1px;
+  }
+  form{border-top:2px dashed var(--line); padding-top:20px; margin-top:18px}
+  .fld{margin-bottom:18px}
+  label{display:block; font-weight:700; font-size:16px; margin-bottom:6px}
+  label .opt{font-weight:400; color:var(--muted); font-size:14px}
+  .hint{font-size:14px; color:var(--muted); margin:6px 0 0}
+  input[type="tel"],input[type="text"],input[type="email"],select,textarea{
+    width:100%; font:inherit; font-size:17px; color:var(--ink);
+    background:var(--field); border:2px solid var(--line); border-radius:12px;
+    padding:14px 14px; min-height:54px; appearance:none;
+  }
+  textarea{min-height:96px; resize:vertical}
+  select{
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'><path d='M1 1l6 6 6-6' fill='none' stroke='%231C1917' stroke-width='2' stroke-linecap='round'/></svg>");
+    background-repeat:no-repeat; background-position:right 16px center; padding-right:42px;
+  }
+  input:focus,select:focus,textarea:focus{outline:none; border-color:var(--ink)}
+  .consent{
+    display:flex; gap:12px; align-items:flex-start;
+    background:var(--bg); border:1px solid var(--line); border-radius:12px; padding:14px;
+  }
+  .consent input[type="checkbox"]{width:24px; height:24px; flex:0 0 auto; margin-top:2px; accent-color:var(--ink)}
+  .consent span{font-size:15px; font-weight:400}
+  .submit{
+    width:100%; font:inherit; font-weight:800; font-size:19px; cursor:pointer;
+    background:var(--hl); color:var(--ink); border:2px solid var(--ink); border-radius:14px;
+    padding:16px; min-height:60px; margin-top:20px;
+  }
+  .submit:active{transform:translateY(1px)}
+  .small{font-size:14px; color:var(--muted); text-align:center; margin:18px 0 0}
+  .small a{color:var(--ink); font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="langbar" role="group" aria-label="Language / Լեզու">
+    <button type="button" data-setlang="hy">ՀԱՅ</button>
+    <button type="button" data-setlang="ru">RU</button>
+    <button type="button" data-setlang="en">EN</button>
+    <button type="button" data-setlang="es">ES</button>
+  </div>
+
+  <p class="brand">LA ARMENIAN NEWS · SITVIO</p>
+
+  <div class="card">
+    <h1><span data-i18n="headPre"></span><mark data-i18n="headHl"></mark><span data-i18n="headPost"></span></h1>
+    <p class="sub" data-i18n="subline"></p>
+
+    <div class="how">
+      <h2 data-i18n="howTitle"></h2>
+      <ol>
+        <li><span class="num">1</span><span data-i18n="step1"></span></li>
+        <li><span class="num">2</span><span data-i18n="step2"></span></li>
+        <li><span class="num">3</span><span data-i18n="step3"></span></li>
+      </ol>
+    </div>
+
+    <form action="https://formsubmit.co/davit@sitvio.com" method="POST">
+      <input type="hidden" name="_subject" value="Նոր հայտ — hayt.sitvio.com">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="true">
+      <input type="hidden" name="_next" value="https://sitvio.com/hayt/thanks.html">
+
+      <div class="fld">
+        <label for="service" data-i18n="labelService"></label>
+        <select id="service" name="service" required>
+          <option value="" disabled selected data-i18n="selectPh"></option>
+          <option value="Վերանորոգում և շինարարություն" data-i18n="svc0"></option>
+          <option value="Սանտեխնիկա" data-i18n="svc1"></option>
+          <option value="Էլեկտրիկա" data-i18n="svc2"></option>
+          <option value="Ավտոսպասարկում" data-i18n="svc3"></option>
+          <option value="Գեղեցկության սրահ" data-i18n="svc4"></option>
+          <option value="Մաքրում" data-i18n="svc5"></option>
+          <option value="Տեղափոխում և առաքում" data-i18n="svc6"></option>
+          <option value="Անշարժ գույք" data-i18n="svc7"></option>
+          <option value="Ապահովագրություն" data-i18n="svc8"></option>
+          <option value="Այլ ծառայություն" data-i18n="svc9"></option>
+        </select>
+      </div>
+
+      <div class="fld">
+        <label for="phone" data-i18n="labelPhone"></label>
+        <input type="tel" id="phone" name="phone" required autocomplete="tel" inputmode="tel" placeholder="+1 (___) ___-____">
+        <p class="hint" data-i18n="phoneHint"></p>
+      </div>
+
+      <div class="fld">
+        <label for="name"><span data-i18n="labelName"></span> <span class="opt">(</span><span class="opt" data-i18n="optional"></span><span class="opt">)</span></label>
+        <input type="text" id="name" name="name" autocomplete="name" data-i18n-ph="namePh">
+      </div>
+
+      <div class="fld">
+        <label for="email"><span data-i18n="labelEmail"></span> <span class="opt">(</span><span class="opt" data-i18n="optional"></span><span class="opt">)</span></label>
+        <input type="email" id="email" name="email" autocomplete="email" placeholder="name@example.com">
+      </div>
+
+      <div class="fld">
+        <label for="message"><span data-i18n="labelMessage"></span> <span class="opt">(</span><span class="opt" data-i18n="optional"></span><span class="opt">)</span></label>
+        <textarea id="message" name="message" data-i18n-ph="messagePh"></textarea>
+      </div>
+
+      <label class="consent">
+        <input type="checkbox" name="consent" value="yes" required>
+        <span data-i18n="consent"></span>
+      </label>
+
+      <button type="submit" class="submit" data-i18n="submit"></button>
+    </form>
+
+    <p class="small" data-i18n="smallPrint"></p>
+    <p class="small"><a href="privacy.html" data-i18n="privacyLink"></a></p>
+  </div>
+</div>
+
+<script>
+var I18N = {
+  hy: {
+    pageTitle: "Պատվիրեք ծառայություն — LA Armenian News · Sitvio",
+    headPre: "Պատվիրեք ", headHl: "ծառայություն", headPost: "",
+    subline: "Թողեք հեռախոսահամարը՝ մասնագետը կզանգի ձեզ։ Ձեզ համար՝ անվճար։",
+    howTitle: "Ինչպե՞ս է աշխատում",
+    step1: "Ընտրեք ծառայությունը և թողեք համարը։",
+    step2: "Մենք փոխանցում ենք հայտը մասնագետին։",
+    step3: "Մասնագետը զանգում է ձեզ և պայմանավորվում եք։",
+    labelService: "Ծառայություն",
+    selectPh: "Ընտրեք ծառայությունը",
+    svc0: "Վերանորոգում և շինարարություն",
+    svc1: "Սանտեխնիկա",
+    svc2: "Էլեկտրիկա",
+    svc3: "Ավտոսպասարկում",
+    svc4: "Գեղեցկության սրահ",
+    svc5: "Մաքրում",
+    svc6: "Տեղափոխում և առաքում",
+    svc7: "Անշարժ գույք",
+    svc8: "Ապահովագրություն",
+    svc9: "Այլ ծառայություն",
+    labelPhone: "Հեռախոսահամար",
+    phoneHint: "Մասնագետը կզանգի հենց այս համարին։",
+    labelName: "Անուն",
+    optional: "ոչ պարտադիր",
+    namePh: "Ձեր անունը",
+    labelEmail: "Էլ. փոստ",
+    labelMessage: "Մեկնաբանություն",
+    messagePh: "Կարճ նկարագրեք, թե ինչ է պետք…",
+    consent: "Համաձայն եմ, որ իմ հեռախոսահամարը փոխանցվի ծառայության մասնագետին, որը կզանգի ինձ իմ հայտի վերաբերյալ։",
+    submit: "Ուղարկել հայտը",
+    smallPrint: "Ձեզ համար ծառայությունը անվճար է։ Մասնագետները վճարում են մեզ տեղադրման համար։",
+    privacyLink: "Գաղտնիության քաղաքականություն"
+  },
+  ru: {
+    pageTitle: "Закажите услугу — LA Armenian News · Sitvio",
+    headPre: "Закажите ", headHl: "услугу", headPost: "",
+    subline: "Оставьте номер телефона — специалист вам перезвонит. Для вас это бесплатно.",
+    howTitle: "Как это работает",
+    step1: "Выберите услугу и оставьте номер телефона.",
+    step2: "Мы передаём заявку специалисту.",
+    step3: "Специалист звонит вам, и вы договариваетесь напрямую.",
+    labelService: "Услуга",
+    selectPh: "Выберите услугу",
+    svc0: "Ремонт и строительство",
+    svc1: "Сантехника",
+    svc2: "Электрика",
+    svc3: "Автосервис",
+    svc4: "Салон красоты",
+    svc5: "Уборка",
+    svc6: "Переезд и доставка",
+    svc7: "Недвижимость",
+    svc8: "Страхование",
+    svc9: "Другая услуга",
+    labelPhone: "Номер телефона",
+    phoneHint: "Специалист позвонит именно на этот номер.",
+    labelName: "Имя",
+    optional: "необязательно",
+    namePh: "Ваше имя",
+    labelEmail: "Эл. почта",
+    labelMessage: "Комментарий",
+    messagePh: "Кратко опишите, что нужно…",
+    consent: "Согласен(на), чтобы мой номер телефона передали специалисту по услугам, который позвонит мне по моей заявке.",
+    submit: "Отправить заявку",
+    smallPrint: "Для вас услуга бесплатна. Специалисты платят нам за размещение.",
+    privacyLink: "Политика конфиденциальности"
+  },
+  en: {
+    pageTitle: "Order a service — LA Armenian News · Sitvio",
+    headPre: "Order a ", headHl: "service", headPost: "",
+    subline: "Leave your phone number and a professional will call you back. It's free for you.",
+    howTitle: "How it works",
+    step1: "Choose a service and leave your number.",
+    step2: "We pass your request to a professional.",
+    step3: "The professional calls you and you agree on the details directly.",
+    labelService: "Service",
+    selectPh: "Choose a service",
+    svc0: "Renovation & construction",
+    svc1: "Plumbing",
+    svc2: "Electrical work",
+    svc3: "Auto service & repair",
+    svc4: "Beauty salon",
+    svc5: "Cleaning",
+    svc6: "Moving & delivery",
+    svc7: "Real estate",
+    svc8: "Insurance",
+    svc9: "Other service",
+    labelPhone: "Phone number",
+    phoneHint: "The professional will call this exact number.",
+    labelName: "Name",
+    optional: "optional",
+    namePh: "Your name",
+    labelEmail: "Email",
+    labelMessage: "Message",
+    messagePh: "Briefly describe what you need…",
+    consent: "I agree that my phone number will be shared with a service professional who will call me about my request.",
+    submit: "Send request",
+    smallPrint: "The service is free for you. Professionals pay us a placement fee.",
+    privacyLink: "Privacy policy"
+  },
+  es: {
+    pageTitle: "Pida un servicio — LA Armenian News · Sitvio",
+    headPre: "Pida un ", headHl: "servicio", headPost: "",
+    subline: "Deje su número de teléfono y un profesional le llamará. Para usted es gratis.",
+    howTitle: "Cómo funciona",
+    step1: "Elija un servicio y deje su número.",
+    step2: "Pasamos su solicitud a un profesional.",
+    step3: "El profesional le llama y acuerdan los detalles directamente.",
+    labelService: "Servicio",
+    selectPh: "Elija un servicio",
+    svc0: "Reformas y construcción",
+    svc1: "Fontanería",
+    svc2: "Electricidad",
+    svc3: "Servicio y reparación de autos",
+    svc4: "Salón de belleza",
+    svc5: "Limpieza",
+    svc6: "Mudanzas y entregas",
+    svc7: "Bienes raíces",
+    svc8: "Seguros",
+    svc9: "Otro servicio",
+    labelPhone: "Número de teléfono",
+    phoneHint: "El profesional llamará a este número.",
+    labelName: "Nombre",
+    optional: "opcional",
+    namePh: "Su nombre",
+    labelEmail: "Correo electrónico",
+    labelMessage: "Mensaje",
+    messagePh: "Describa brevemente lo que necesita…",
+    consent: "Acepto que mi número de teléfono se comparta con un profesional de servicios que me llamará sobre mi solicitud.",
+    submit: "Enviar solicitud",
+    smallPrint: "El servicio es gratuito para usted. Los profesionales nos pagan una tarifa de colocación.",
+    privacyLink: "Política de privacidad"
+  }
+};
+
+function applyLang(lang){
+  if(!I18N[lang]) lang = "hy";
+  var d = I18N[lang];
+  document.documentElement.lang = lang;
+  document.title = d.pageTitle;
+  var els = document.querySelectorAll("[data-i18n]");
+  for(var i = 0; i < els.length; i++){
+    var k = els[i].getAttribute("data-i18n");
+    if(d[k] !== undefined) els[i].textContent = d[k];
+  }
+  var phs = document.querySelectorAll("[data-i18n-ph]");
+  for(var j = 0; j < phs.length; j++){
+    var pk = phs[j].getAttribute("data-i18n-ph");
+    if(d[pk] !== undefined) phs[j].setAttribute("placeholder", d[pk]);
+  }
+  var btns = document.querySelectorAll("[data-setlang]");
+  for(var b = 0; b < btns.length; b++){
+    btns[b].classList.toggle("active", btns[b].getAttribute("data-setlang") === lang);
+  }
+  try{ localStorage.setItem("forma-lang", lang); }catch(e){}
+}
+
+var saved = "hy";
+try{ saved = localStorage.getItem("forma-lang") || "hy"; }catch(e){}
+applyLang(saved);
+
+var langBtns = document.querySelectorAll("[data-setlang]");
+for(var x = 0; x < langBtns.length; x++){
+  langBtns[x].addEventListener("click", function(){
+    applyLang(this.getAttribute("data-setlang"));
+  });
+}
+</script>
+</body>
+</html>
