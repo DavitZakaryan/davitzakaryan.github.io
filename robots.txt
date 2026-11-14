@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /privacy.html
 
-Sitemap: https://davitzakaryan.github.io/sitemap.xml
+Sitemap: https://sitvio.com/sitemap.xml
