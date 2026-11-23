@@ -1,4 +1,5 @@
 <!doctype html>
+<!-- Sitvio Version 6 — 2026-11-22: design techniques pass (object-as-letter wordmark, pricing rhythm+accent, hero scale, 60/30/10 audit) -->
 <html lang="en">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -132,15 +133,25 @@
     @media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:32px;min-height:auto;padding:64px 0 80px}.browser-art{min-height:410px;max-width:620px}.section-head{grid-template-columns:1fr;gap:16px}.pricing-layout{grid-template-columns:1fr}.price-intro{position:static}.quote-shell{grid-template-columns:1fr}.contact-grid{grid-template-columns:1fr;align-items:start}}
     @media (max-width:680px){.wrap{width:min(100% - 28px,var(--max))}.topbar-in{min-height:60px}nav a:not(.nav-cta){display:none}.wordmark{font-size:23px}.hero-grid{padding:52px 0 68px}h1{font-size:clamp(44px,13.5vw,64px)}.hero-copy{font-size:18px}.actions{display:grid}.button{width:100%}.nav-cta .button{width:auto}.browser-art{min-height:330px}.browser{inset:22px 10px 28px 12px}.site-preview{padding:28px 22px}.map-card{right:0;width:178px;padding:12px}.metric-card{left:0}.section{padding:70px 0}.projects{grid-template-columns:1fr}.project,.project:nth-child(3){grid-column:auto;min-height:350px}.project-info{left:20px;right:20px;bottom:20px}.price-row{grid-template-columns:1fr;gap:10px}.quote-form{padding:26px 20px}.quote-total{padding:30px 22px}.why-grid{grid-template-columns:1fr}.why{padding:28px 24px}.contact{padding:76px 0}}
     @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.project img{transition:none}.button{transition:none}}
-  </style>
+  
+/* Sitvio v6 (2026-11-22) — saved design techniques: object-as-letter, rhythm+accent, scale, 60/30/10 */
+.o-mark{display:inline-block;width:.60em;height:.60em;border:.13em solid var(--volt);border-radius:50%;margin:0 .03em;vertical-align:-.04em;position:relative}
+.o-mark::after{content:"";position:absolute;inset:0;margin:auto;width:.18em;height:.18em;border-radius:50%;background:var(--volt)}
+.price-row.featured{background:linear-gradient(90deg,rgba(198,242,78,.18),rgba(198,242,78,0) 72%);border-bottom:2px solid var(--volt);padding-left:14px;padding-right:14px}
+.pick-badge{display:inline-block;margin-left:12px;padding:3px 10px;border-radius:999px;background:var(--volt);color:var(--ink);font-size:12px;font-weight:700;letter-spacing:.05em;vertical-align:middle;text-transform:uppercase;white-space:nowrap}
+.price-row.featured .price{font-weight:800}
+.hero{position:relative;overflow:hidden}
+.hero-ghost{position:absolute;right:-2vw;bottom:-3.5vw;font-size:23vw;font-weight:800;line-height:.8;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1px rgba(247,247,244,.09);pointer-events:none;user-select:none;z-index:0}
+.hero-grid{position:relative;z-index:1}
+</style>
 </head>
 <body>
   <header class="topbar"><div class="wrap topbar-in">
-    <a class="wordmark" href="#top" aria-label="Sitvio — home">sitvio<span class="dot-mark">.</span></a>
+    <a class="wordmark" href="#top" aria-label="Sitvio — home">sitvi<span class="o-mark" aria-hidden="true"></span><span class="dot-mark">.</span></a>
     <nav aria-label="Primary navigation"><a href="#services">Services</a><a href="#work">Work</a><a href="#pricing">Pricing</a><a href="#contact">Contact</a><span class="nav-cta"><a class="button accent small" href="#contact">Start a project</a></span></nav>
   </div></header>
   <main id="top">
-    <section class="hero"><div class="wrap hero-grid">
+    <section class="hero"><div class="hero-ghost" aria-hidden="true">sitvio</div><div class="wrap hero-grid">
       <div>
         <p class="eyebrow">Web development — websites for business</p>
         <h1>Websites that bring you <em>customers.</em></h1>
@@ -164,7 +175,7 @@
     </div></div></section>
     <section class="section" id="pricing"><div class="wrap pricing-layout"><div class="price-intro"><p class="kicker">03 / PRICING</p><h2>Straight answers before the work starts.</h2><p>Choose the scope that fits now. Every website price includes a responsive build, search essentials, launch support, and two revision rounds.</p><a class="button alt" href="#quote">Calculate a project</a></div><div><div class="price-stack">
       <div class="price-row"><div><h3>Landing page</h3><p>Single-page site, domain, hosting and launch.</p></div><span class="price">$390</span></div>
-      <div class="price-row"><div><h3>Business website</h3><p>Three to five pages with a complete service structure.</p></div><span class="price">$790</span></div>
+      <div class="price-row featured"><div><h3>Business website <span class="pick-badge">Most chosen</span></h3><p>Three to five pages with a complete service structure.</p></div><span class="price">$790</span></div>
       <div class="price-row"><div><h3>Website redesign</h3><p>New visual direction, mobile improvements and speed work.</p></div><span class="price">from $490</span></div>
     </div></div></div></section>
     <section class="section" id="quote"><div class="wrap"><div class="section-head"><p class="kicker">04 / QUICK ESTIMATE</p><h2>Shape the scope. See the number.</h2></div><div class="quote-shell">
@@ -190,7 +201,7 @@
     </div></div></section>
     <section class="contact" id="contact"><div class="wrap contact-grid"><div><p class="kicker">READY WHEN YOU ARE</p><h2>Tell Sitvio what your business needs next.</h2><p>Email or use the form with the business type, current website, and goal. You’ll get a direct recommendation and a clear price.</p><p class="founder-line">Sitvio is run by Davit Zakaryan, a web developer in Glendale, CA.</p></div><div class="contact-actions"><a class="button alt" href="mailto:davit@sitvio.com">davit@sitvio.com</a></div><form class="contact-form" action="https://formsubmit.co/davit@sitvio.com" method="POST"><input type="hidden" name="_subject" value="New message from sitvio.com"><input type="hidden" name="_template" value="table"><input type="hidden" name="_captcha" value="true"><label>Name<input type="text" name="name" required autocomplete="name" placeholder="Your name"></label><label>Email<input type="email" name="email" required autocomplete="email" placeholder="you@example.com"></label><label class="full">Message<textarea name="message" rows="5" required placeholder="Business type, current website, and your goal"></textarea></label><button class="button accent" type="submit">Send</button></form></div></section>
   </main>
-  <footer><div class="wrap footer-grid"><a class="wordmark" href="#top">sitvio<span class="dot-mark">.</span></a><span>© 2026 Sitvio</span><span><a href="mailto:davit@sitvio.com">davit@sitvio.com</a></span><span><a href="https://www.instagram.com/davit.zakaryan_/" target="_blank" rel="noopener noreferrer">Instagram · @davit.zakaryan_</a></span><span><a href="privacy.html">Privacy</a></span><span class="footer-meta">Glendale, CA · Images via Unsplash</span></div></footer>
+  <footer><div class="wrap footer-grid"><a class="wordmark" href="#top">sitvi<span class="o-mark" aria-hidden="true"></span><span class="dot-mark">.</span></a><span>© 2026 Sitvio</span><span><a href="mailto:davit@sitvio.com">davit@sitvio.com</a></span><span><a href="https://www.instagram.com/davit.zakaryan_/" target="_blank" rel="noopener noreferrer">Instagram · @davit.zakaryan_</a></span><span><a href="privacy.html">Privacy</a></span><span class="footer-meta">Glendale, CA · Images via Unsplash</span></div></footer>
   <script>
     (function(){
       document.querySelectorAll('.choices').forEach(function(group){group.addEventListener('click',function(event){var button=event.target.closest('.choice');if(!button)return;if(group.dataset.mode==='single'){group.querySelectorAll('.choice').forEach(function(item){item.classList.remove('active')});button.classList.add('active')}else{button.classList.toggle('active')}updateQuote()})});
